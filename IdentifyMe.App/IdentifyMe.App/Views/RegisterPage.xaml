@@ -9,7 +9,7 @@
             <Label
                 FontSize="20"
                 HorizontalOptions="Center"
-                Text="Welcome to Osma"></Label>
+                Text="Welcome to IdentifyMe. You need to create a wallet first"></Label>
             <Button 
                 VerticalOptions="CenterAndExpand"
                 Text="Create Wallet"

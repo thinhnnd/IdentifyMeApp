@@ -38,12 +38,12 @@ namespace IdentifyMe.App
 
             builder
                 .RegisterAssemblyTypes(ThisAssembly)
-                .Where(x => x.Namespace.Contains("Osma.Mobile.App.ViewModels"))
+                .Where(x => x.Namespace.Contains("IdentifyMe.App.ViewModels"))
                 .InstancePerDependency();
 
             builder
                 .RegisterAssemblyTypes(ThisAssembly)
-                .Where(x => x.Namespace.Contains("Osma.Mobile.App.Views"))
+                .Where(x => x.Namespace.Contains("IdentifyMe.App.Views"))
                 .InstancePerDependency();
         }
     }

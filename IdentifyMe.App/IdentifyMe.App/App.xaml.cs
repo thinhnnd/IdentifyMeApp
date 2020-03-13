@@ -34,6 +34,7 @@ namespace IdentifyMe.App
 
         private readonly INavigationService _navigationService;
         private readonly ICustomAgentContextProvider _contextProvider;
+        Task InitializeTask;
 
         public App(IContainer container)
         {
@@ -42,39 +43,40 @@ namespace IdentifyMe.App
             Colors.Init();
 
             //osma
-            //_navigationService = container.Resolve<INavigationService>();
-            //_contextProvider = container.Resolve<ICustomAgentContextProvider>();
-            //InitializeTask = Initialize();
+            _navigationService = container.Resolve<INavigationService>();
+            _contextProvider = container.Resolve<ICustomAgentContextProvider>();
+            InitializeTask = Initialize();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
 
         }
 
         //osma code
-        //Task InitializeTask;
-        //private async Task Initialize()
-        //{
-        //    //Pages
-        //    _navigationService.AddPageViewModelBinding<MainViewModel, MainPage>();
-        //    _navigationService.AddPageViewModelBinding<ConnectionsViewModel, ConnectionsPage>();
-        //    _navigationService.AddPageViewModelBinding<ConnectionViewModel, ConnectionPage>();
-        //    _navigationService.AddPageViewModelBinding<RegisterViewModel, RegisterPage>();
-        //    _navigationService.AddPageViewModelBinding<AcceptInviteViewModel, AcceptInvitePage>();
-        //    _navigationService.AddPageViewModelBinding<CredentialsViewModel, CredentialsPage>();
-        //    _navigationService.AddPageViewModelBinding<CredentialViewModel, CredentialPage>();
-        //    _navigationService.AddPageViewModelBinding<AccountViewModel, AccountPage>();
-        //    _navigationService.AddPageViewModelBinding<CreateInvitationViewModel, CreateInvitationPage>();
+        private async Task Initialize()
+        {
+            //Pages
+            //_navigationService.AddPageViewModelBinding<MainViewModel, MainPage>();
+            //_navigationService.AddPageViewModelBinding<ConnectionsViewModel, ConnectionsPage>();
+            //_navigationService.AddPageViewModelBinding<ConnectionViewModel, ConnectionPage>();
+            _navigationService.AddPageViewModelBinding<RegisterViewModel, RegisterPage>();
+            //_navigationService.AddPageViewModelBinding<AcceptInviteViewModel, AcceptInvitePage>();
+            //_navigationService.AddPageViewModelBinding<CredentialsViewModel, CredentialsPage>();
+            //_navigationService.AddPageViewModelBinding<CredentialViewModel, CredentialPage>();
+            //_navigationService.AddPageViewModelBinding<AccountViewModel, AccountPage>();
+            //_navigationService.AddPageViewModelBinding<CreateInvitationViewModel, CreateInvitationPage>();
 
-        //    if (_contextProvider.AgentExists())
-        //    {
-        //        await _navigationService.NavigateToAsync<MainViewModel>();
-        //    }
-        //    else
-        //    {
-        //        await _navigationService.NavigateToAsync<RegisterViewModel>();
-        //    }
-        //}
+            if (_contextProvider.AgentExists())
+            {
+                MainPage a = new MainPage();
+                await _navigationService.NavigateToAsync(a);
+               // await _navigationService.NavigateToAsync<MainViewModel>();
+            }
+            else
+            {
+                await _navigationService.NavigateToAsync<RegisterViewModel>();
+            }
+        }
 
         protected override void OnStart()
         {
