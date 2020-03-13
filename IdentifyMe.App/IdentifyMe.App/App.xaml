@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="IdentifyMe.App.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BasePageColor">#EFEFF4</Color>
+            <Color x:Key="DarkPageColor">#F8F8F8</Color>
+            <Color x:Key="BaseContentViewColor">#FFFFFF</Color>
+
+            <Color x:Key="BaseTextColor">#7b7b7b</Color>
+            <Color x:Key="LightTextColor">#FFFFFF</Color>
+
+            <Color x:Key="AppMainColor">#5c6bc0</Color>
+            <Color x:Key="AppMainColorLight">#8e99f3</Color>
+            <Color x:Key="AppMainColorDark">#26418f</Color>
+
+            <Color x:Key="BlueAccentColor">#3891D6</Color>
+            <Color x:Key="RedAccentColor">#EE3A24</Color>
+            <Color x:Key="GreenAccentColor">#73DA73</Color>
+            <Color x:Key="Grey600Color">#757575</Color>
+
+            <Color x:Key="NavigationBarColor">#2196f3</Color>
+            <Color x:Key="NavigationBarTextColor">#ffffff</Color>
+
+            <Style
+                TargetType="NavigationPage"
+                ApplyToDerivedTypes="true">
+                <Setter
+                    Property="BarBackgroundColor"
+                    Value="{ StaticResource AppMainColor }" />
+                <Setter
+                    Property="BarTextColor"
+                    Value="{ StaticResource LightTextColor }" />
+            </Style>
+
+            <Style
+                TargetType="TabbedPage"
+                ApplyToDerivedTypes="true"
+                >
+                <Setter 
+                    Property="BarBackgroundColor" 
+                    Value="#F6F8FA">
+                </Setter>
+                <Setter 
+                    Property="SelectedTabColor" 
+                    Value="{ StaticResource AppMainColor}">
+                </Setter>
+                <Setter 
+                    Property="UnselectedTabColor" 
+                    Value="{ StaticResource Grey600Color}">
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>
