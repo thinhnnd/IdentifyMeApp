@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IdentifyMe.App.Views.Notification
+namespace IdentifyMe.App.Views.Setting
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Notification : ContentPage
+    public partial class SettingPage : ContentPage
     {
-        public Notification()
+        public SettingPage()
         {
             InitializeComponent();
         }

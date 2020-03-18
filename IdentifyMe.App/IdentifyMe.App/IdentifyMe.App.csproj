@@ -32,4 +32,31 @@
   <ItemGroup>
     <ProjectReference Include="..\IdentifyMe.App.Services\IdentifyMe.App.Services.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MainPage2.xaml.cs">
+      <DependentUpon>MainPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Connections\ConnectionsPage.xaml.cs">
+      <DependentUpon>ConnectionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Credentials\CredentialsPage.xaml.cs">
+      <DependentUpon>CredentialsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Notification\NotificationPage.xaml.cs">
+      <DependentUpon>NotificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Profile\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Setting\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MainPage2.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

@@ -2,22 +2,22 @@
 using Acr.UserDialogs;
 using IdentifyMe.App.Services.Interfaces;
 //using IdentifyMe.App.ViewModels.Account;
-//using IdentifyMe.App.ViewModels.Connections;
+using IdentifyMe.App.ViewModels.Connections;
 //using IdentifyMe.App.ViewModels.CreateInvitation;
-//using IdentifyMe.App.ViewModels.Credentials;
+using IdentifyMe.App.ViewModels.Credentials;
+using IdentifyMe.App.ViewModels.Profile;
+using IdentifyMe.App.ViewModels.Notification;
+using IdentifyMe.App.ViewModels.Setting;
 using ReactiveUI;
 
 namespace IdentifyMe.App.ViewModels
 {
     public class MainViewModel : ABaseViewModel
     {
+
         public MainViewModel(
             IUserDialogs userDialogs,
-            INavigationService navigationService
-            //ConnectionsViewModel connectionsViewModel,
-            //CredentialsViewModel credentialsViewModel,
-            //AccountViewModel accountViewModel,
-            //CreateInvitationViewModel createInvitationViewModel
+            INavigationService navigationService  
         ) : base(
                 nameof(MainViewModel),
                 userDialogs,
@@ -26,47 +26,63 @@ namespace IdentifyMe.App.ViewModels
         {
             //Connections = connectionsViewModel;
             //Credentials = credentialsViewModel;
-            //Account = accountViewModel;
+            //Profile = profileViewModel;
+            //Setting = settingViewModel;
+            //Notification = notificationViewModel;
             //CreateInvitation = createInvitationViewModel;
+            //CredentialsViewModel credentialsViewModel,
+            //ConnectionsViewModel connectionsViewModel,
+            //ProfileViewModel profileViewModel,
+            //NotificationViewModel notificationViewModel,
+            //SettingViewModel settingViewModel
         }
 
-        public override async Task InitializeAsync(object navigationData)
+        //public override async Task InitializeAsync(object navigationData) 
+        //{ 
+
+        //    await Connections.InitializeAsync(null);
+        //    await Credentials.InitializeAsync(null);
+        //    await Profile.InitializeAsync(null);
+        //    await Setting.InitializeAsync(null);
+        //    await Notification.InitializeAsync(null);
+        //    await base.InitializeAsync(navigationData);
+        //}
+
+        #region Bindable Properties
+        private ConnectionsViewModel _connections;
+        public ConnectionsViewModel Connections
         {
-            //await Connections.InitializeAsync(null);
-            //await Credentials.InitializeAsync(null);
-            //await Account.InitializeAsync(null);
-            //await CreateInvitation.InitializeAsync(null);
-            await base.InitializeAsync(navigationData);
+            get => _connections;
+            set => this.RaiseAndSetIfChanged(ref _connections, value);
         }
 
-       // #region Bindable Properties
-        //private ConnectionsViewModel _connections;
-        //public ConnectionsViewModel Connections
-        //{
-        //    get => _connections;
-        //    set => this.RaiseAndSetIfChanged(ref _connections, value);
-        //}
+        private CredentialsViewModel _credentials;
+        public CredentialsViewModel Credentials
+        {
+            get => _credentials;
+            set => this.RaiseAndSetIfChanged(ref _credentials, value);
+        }
 
-        //private CredentialsViewModel _credentials;
-        //public CredentialsViewModel Credentials
-        //{
-        //    get => _credentials;
-        //    set => this.RaiseAndSetIfChanged(ref _credentials, value);
-        //}
+        private ProfileViewModel _profile;
+        public ProfileViewModel Profile
+        {
+            get => _profile;
+            set => this.RaiseAndSetIfChanged(ref _profile, value);
+        }
 
-        //private AccountViewModel _account;
-        //public AccountViewModel Account
-        //{
-        //    get => _account;
-        //    set => this.RaiseAndSetIfChanged(ref _account, value);
-        //}
+        private NotificationViewModel _notification;
+        public NotificationViewModel Notification
+        {
+            get => _notification;
+            set => this.RaiseAndSetIfChanged(ref _notification, value);
+        }
 
-        //private CreateInvitationViewModel _createInvitation;
-        //public CreateInvitationViewModel CreateInvitation
-        //{
-        //    get => _createInvitation;
-        //    set => this.RaiseAndSetIfChanged(ref _createInvitation, value);
-        //}
-        //#endregion
+        private SettingViewModel _setting;
+        public SettingViewModel Setting
+        {
+            get => _setting;
+            set => this.RaiseAndSetIfChanged(ref _setting, value);
+        }
+        #endregion
     }
 }

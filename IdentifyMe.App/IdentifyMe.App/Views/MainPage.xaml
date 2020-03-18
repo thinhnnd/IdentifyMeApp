@@ -16,41 +16,30 @@
             x:Class="IdentifyMe.App.Views.MainPage">
 
     <TabbedPage.Children>
-        <NavigationPage Icon="check_circle.png"
+        <credentials:CredentialsPage
+            Icon="check_circle.png"
             Title="Credentials"
-            ios:NavigationPage.PrefersLargeTitles="true" >
-            <x:Arguments >
-                <credentials:Credentials />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Icon="user.png"
+            ios:NavigationPage.PrefersLargeTitles="true">
+        </credentials:CredentialsPage>
+        <profile:ProfilePage Icon="user.png"
             Title="Profile"
             ios:NavigationPage.PrefersLargeTitles="true">
-            <x:Arguments>
-                <profile:Profile />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Icon="users.png"
+        </profile:ProfilePage>
+        <connections:ConnectionsPage Icon="users.png"
             Title="Connection"
             ios:NavigationPage.PrefersLargeTitles="true">
-            <x:Arguments>
-                <connections:Connections />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Icon="Notification.png"
+        </connections:ConnectionsPage>
+        <notification:NotificationPage Icon="Notification.png"
             Title="Notification"
             ios:NavigationPage.PrefersLargeTitles="true">
-            <x:Arguments>
-                <notification:Notification />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Icon="Setting.png"
+        </notification:NotificationPage>
+        <setting:SettingPage Icon="Setting.png"
             Title="Credentials"
             ios:NavigationPage.PrefersLargeTitles="true">
-            <x:Arguments>
-                <setting:Setting />
-            </x:Arguments>
-        </NavigationPage>
+        </setting:SettingPage>
+
     </TabbedPage.Children>
+    <!--<ContentPage Title="Hello" />
+    <ContentPage Title="Test" />-->
 
 </TabbedPage>

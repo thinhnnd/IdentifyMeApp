@@ -4,11 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Title="Credentials"
-             x:Class="IdentifyMe.App.Views.Credentials.Credentials">
+             Title="Setting"
+             x:Class="IdentifyMe.App.Views.Setting.SettingPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Credentials Page!"
+            <Label Text="Setting page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

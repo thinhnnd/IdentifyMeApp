@@ -12,15 +12,19 @@ using Microsoft.AppCenter.Crashes;
 using IdentifyMe.App.Services.Interfaces;
 using IdentifyMe.App.Utilities;
 using IdentifyMe.App.ViewModels;
-//using IdentifyMe.App.ViewModels.Account;
-//using IdentifyMe.App.ViewModels.Connections;
-//using IdentifyMe.App.ViewModels.CreateInvitation;
-//using IdentifyMe.App.ViewModels.Credentials;
-//using IdentifyMe.App.Views.Account;
-//using IdentifyMe.App.Views.Connections;
+using IdentifyMe.App.ViewModels.Profile;
+using IdentifyMe.App.ViewModels.Connections;
+using IdentifyMe.App.ViewModels.Credentials;
+using IdentifyMe.App.ViewModels.Notification;
+using IdentifyMe.App.ViewModels.Setting;
+
+using IdentifyMe.App.Views.Connections;
+using IdentifyMe.App.Views.Credentials;
+using IdentifyMe.App.Views.Notification;
+using IdentifyMe.App.Views.Profile;
+using IdentifyMe.App.Views.Setting;
 //using IdentifyMe.App.Views.CreateInvitation;
 
-using IdentifyMe.App.Views.Credentials;
 using Xamarin.Forms.Internals;
 
 using MainPage = IdentifyMe.App.Views.MainPage;
@@ -48,29 +52,26 @@ namespace IdentifyMe.App
             InitializeTask = Initialize();
 
             DependencyService.Register<MockDataStore>();
-            //MainPage = new MainPage();
 
         }
 
         //osma code
         private async Task Initialize()
         {
-            //Pages
-            //_navigationService.AddPageViewModelBinding<MainViewModel, MainPage>();
-            //_navigationService.AddPageViewModelBinding<ConnectionsViewModel, ConnectionsPage>();
-            //_navigationService.AddPageViewModelBinding<ConnectionViewModel, ConnectionPage>();
+            //Bind ViewModel with Page
+
+            _navigationService.AddPageViewModelBinding<MainViewModel, MainPage>();
+            _navigationService.AddPageViewModelBinding<ProfileViewModel, ProfilePage>();
+            _navigationService.AddPageViewModelBinding<CredentialsViewModel, CredentialsPage>();
+            _navigationService.AddPageViewModelBinding<ConnectionsViewModel, ConnectionsPage>();
+            _navigationService.AddPageViewModelBinding<NotificationViewModel, NotificationPage>();
+            _navigationService.AddPageViewModelBinding<SettingViewModel, SettingPage>();
+           // _navigationService.AddPageViewModelBinding<BetterMainViewModel, MainPage2>();
             _navigationService.AddPageViewModelBinding<RegisterViewModel, RegisterPage>();
-            //_navigationService.AddPageViewModelBinding<AcceptInviteViewModel, AcceptInvitePage>();
-            //_navigationService.AddPageViewModelBinding<CredentialsViewModel, CredentialsPage>();
-            //_navigationService.AddPageViewModelBinding<CredentialViewModel, CredentialPage>();
-            //_navigationService.AddPageViewModelBinding<AccountViewModel, AccountPage>();
-            //_navigationService.AddPageViewModelBinding<CreateInvitationViewModel, CreateInvitationPage>();
 
             if (_contextProvider.AgentExists())
             {
-                MainPage a = new MainPage();
-                await _navigationService.NavigateToAsync(a);
-               // await _navigationService.NavigateToAsync<MainViewModel>();
+                await _navigationService.NavigateToAsync<MainViewModel>();
             }
             else
             {

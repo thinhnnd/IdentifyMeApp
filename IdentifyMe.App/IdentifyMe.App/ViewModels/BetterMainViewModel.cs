@@ -11,14 +11,14 @@ using IdentifyMe.App.Views;
 
 namespace IdentifyMe.App.ViewModels
 {
-    class RegisterViewModel : ABaseViewModel
+    public class BetterMainViewModel : ABaseViewModel
     {
         private readonly ICustomAgentContextProvider _agentContextProvider;
 
-        public RegisterViewModel(IUserDialogs userDialogs,
+        public BetterMainViewModel(IUserDialogs userDialogs,
                     INavigationService navigationService,
-                    ICustomAgentContextProvider agentContextProvider) : base (
-                    nameof(RegisterViewModel),
+                    ICustomAgentContextProvider agentContextProvider) : base(
+                    nameof(BetterMainViewModel),
                     userDialogs,
                     navigationService)
         {
@@ -27,7 +27,7 @@ namespace IdentifyMe.App.ViewModels
 
         #region Binding command
 
-        public ICommand CreateWalletCommand => new Command( async() =>
+        public ICommand CreateWalletCommand => new Command(async () =>
         {
 
             var dialog = UserDialogs.Instance.Loading("Creating wallet");
@@ -41,9 +41,10 @@ namespace IdentifyMe.App.ViewModels
                 WalletCredentials = new WalletCredentials { Key = "LocalWalletKey" }
             };
 
-            if(await _agentContextProvider.CreateAgentAsync(options))
+            if (await _agentContextProvider.CreateAgentAsync(options))
             {
-                await NavigationService.NavigateToAsync<MainViewModel>();
+                MainPage a = new MainPage();
+                await NavigationService.NavigateToAsync(a);
                 dialog?.Hide();
                 dialog?.Dispose();
             }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IdentifyMe.App.Views.Connections
+namespace IdentifyMe.App.Views.Notification
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Connections : ContentPage
+    public partial class NotificationPage : ContentPage
     {
-        public Connections()
+        public NotificationPage()
         {
             InitializeComponent();
         }

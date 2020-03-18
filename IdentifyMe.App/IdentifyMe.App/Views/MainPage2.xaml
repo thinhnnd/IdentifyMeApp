@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:credentials="clr-namespace:IdentifyMe.App.Views.Credentials;assembly=IdentifyMe.App"
+             xmlns:profile="clr-namespace:IdentifyMe.App.Views.Profile;assembly=IdentifyMe.App"
+             xmlns:connections="clr-namespace:IdentifyMe.App.Views.Connections;assembly=IdentifyMe.App"
+             xmlns:notification="clr-namespace:IdentifyMe.App.Views.Notification;assembly=IdentifyMe.App"
+             xmlns:setting="clr-namespace:IdentifyMe.App.Views.Setting;assembly=IdentifyMe.App"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="IdentifyMe.App.Views.MainPage2">
+    <TabbedPage.Children>
+        <credentials:CredentialsPage
+            Icon="check_circle.png"
+            Title="Credentials"
+            ios:NavigationPage.PrefersLargeTitles="true">
+        </credentials:CredentialsPage>
+        <profile:ProfilePage Icon="user.png"
+            Title="Profile"
+            ios:NavigationPage.PrefersLargeTitles="true">
+        </profile:ProfilePage>
+        <connections:ConnectionsPage Icon="users.png"
+            Title="Connection"
+            ios:NavigationPage.PrefersLargeTitles="true">
+        </connections:ConnectionsPage>
+        <notification:NotificationPage Icon="Notification.png"
+            Title="Notification"
+            ios:NavigationPage.PrefersLargeTitles="true">
+        </notification:NotificationPage>
+        <setting:SettingPage Icon="Setting.png"
+            Title="Credentials"
+            ios:NavigationPage.PrefersLargeTitles="true">
+        </setting:SettingPage>
+    </TabbedPage.Children>
+</TabbedPage>

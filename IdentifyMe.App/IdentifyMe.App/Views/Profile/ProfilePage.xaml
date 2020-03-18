@@ -4,11 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Title="Connections"
-             x:Class="IdentifyMe.App.Views.Connections.Connections">
+             Title="Profile"
+             x:Class="IdentifyMe.App.Views.Profile.ProfilePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="EDIT"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Connections Page!"
+            <Label Text="Welcome to ProfilePage!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

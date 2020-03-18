@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              Title="Notification"
-             x:Class="IdentifyMe.App.Views.Notification.Notification">
+             x:Class="IdentifyMe.App.Views.Notification.NotificationPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Notification Page!"

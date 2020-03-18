@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IdentifyMe.App.Views.Credentials
+namespace IdentifyMe.App.Views.Profile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Credentials : ContentPage
+    public partial class ProfilePage : ContentPage
     {
-        public Credentials()
+        public ProfilePage()
         {
             InitializeComponent();
         }
