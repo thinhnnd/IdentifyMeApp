@@ -14,6 +14,8 @@ namespace IdentifyMe.App.ViewModels.Credentials
         private readonly ICredentialService _credentialService;
         private readonly ICustomAgentContextProvider _agentContextProvider;
 
+        private Credential _listCredential;
+
         CredentialsViewModel(
             IUserDialogs userDialogs, 
             INavigationService navigationService, 
@@ -26,6 +28,10 @@ namespace IdentifyMe.App.ViewModels.Credentials
         {
             _credentialService = credentialService;
             _agentContextProvider = agentContextProvider;
+            
         }
+
+        
+        
     }
 }

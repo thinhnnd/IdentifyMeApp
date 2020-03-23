@@ -68,6 +68,7 @@ namespace IdentifyMe.App
             _navigationService.AddPageViewModelBinding<SettingViewModel, SettingPage>();
            // _navigationService.AddPageViewModelBinding<BetterMainViewModel, MainPage2>();
             _navigationService.AddPageViewModelBinding<RegisterViewModel, RegisterPage>();
+            _navigationService.AddPopupViewModelBinding<AcceptInvitationViewModel, AcceptInvitationPage>();
 
             if (_contextProvider.AgentExists())
             {

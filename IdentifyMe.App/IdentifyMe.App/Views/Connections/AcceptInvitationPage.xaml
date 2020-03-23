@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="IdentifyMe.App.Views.Connections.AcceptInvitationPage">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="True"
+                                   PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+    <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="5" Margin="12"> 
+        <StackLayout BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+            <StackLayout>
+                <Label Text="{Binding InvitationContents}" FontSize="20" />
+            </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions Height="Auto"></Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="DodgerBlue"
+                FontSize="15"
+                Text="Login"
+                TextColor="White" />
+                <Button Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="White"
+                BorderColor="DodgerBlue"
+                FontSize="15"
+                Text="Decline"
+                TextColor="DodgerBlue" />
+            </Grid>
+
+        </StackLayout>
+
+    </Frame>
+    
+</pages:PopupPage>

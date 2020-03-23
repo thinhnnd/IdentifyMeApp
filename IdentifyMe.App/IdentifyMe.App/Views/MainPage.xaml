@@ -12,8 +12,10 @@
             xmlns:setting="clr-namespace:IdentifyMe.App.Views.Setting;assembly=IdentifyMe.App"
             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            x:Class="IdentifyMe.App.Views.MainPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            x:Class="IdentifyMe.App.Views.MainPage">
+            CurrentPageChanged="CurrentPageChanged"
+            Appearing="Appearing">
 
     <TabbedPage.Children>
         <credentials:CredentialsPage
@@ -27,7 +29,8 @@
         </profile:ProfilePage>
         <connections:ConnectionsPage Icon="users.png"
             Title="Connection"
-            ios:NavigationPage.PrefersLargeTitles="true">
+            ios:NavigationPage.PrefersLargeTitles="true"
+            BindingContext="{Binding Connections}">
         </connections:ConnectionsPage>
         <notification:NotificationPage Icon="Notification.png"
             Title="Notification"

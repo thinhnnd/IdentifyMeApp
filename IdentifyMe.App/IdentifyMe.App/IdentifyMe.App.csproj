@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Connections\AcceptInvitationPage.xaml.cs">
+      <DependentUpon>AcceptInvitationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MainPage2.xaml.cs">
       <DependentUpon>MainPage2.xaml</DependentUpon>
     </Compile>
@@ -55,6 +58,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\Components\FloatingActionButton.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Connections\AcceptInvitationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\MainPage2.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

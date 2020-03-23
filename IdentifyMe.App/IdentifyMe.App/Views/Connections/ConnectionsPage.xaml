@@ -4,13 +4,18 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Title="Connections"
+             Title="{Binding Name}"
              x:Class="IdentifyMe.App.Views.Connections.ConnectionsPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="Start">
             <Label Text="Welcome to Connections Page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding InvitationMessageUrl, Mode=TwoWay}" />
+            <Button Text="Scand" Command="{Binding OpenScannerPageCommand}" />
+            <Button Text="Connect" Command="{Binding AcceptConnectionCommand}" />
+            <Label Text="Result:" />
+            <Label Text="{Binding QRScanedResult, Mode=TwoWay}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

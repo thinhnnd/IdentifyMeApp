@@ -17,14 +17,15 @@ namespace IdentifyMe.App.ViewModels
 
         public MainViewModel(
             IUserDialogs userDialogs,
-            INavigationService navigationService  
+            INavigationService navigationService,
+            ConnectionsViewModel connectionsViewModel
         ) : base(
                 nameof(MainViewModel),
                 userDialogs,
                 navigationService
         )
         {
-            //Connections = connectionsViewModel;
+            Connections = connectionsViewModel;
             //Credentials = credentialsViewModel;
             //Profile = profileViewModel;
             //Setting = settingViewModel;
@@ -37,16 +38,16 @@ namespace IdentifyMe.App.ViewModels
             //SettingViewModel settingViewModel
         }
 
-        //public override async Task InitializeAsync(object navigationData) 
-        //{ 
+        public override async Task InitializeAsync(object navigationData) 
+        { 
 
-        //    await Connections.InitializeAsync(null);
+           await Connections.InitializeAsync(null);
         //    await Credentials.InitializeAsync(null);
         //    await Profile.InitializeAsync(null);
         //    await Setting.InitializeAsync(null);
         //    await Notification.InitializeAsync(null);
         //    await base.InitializeAsync(navigationData);
-        //}
+        }
 
         #region Bindable Properties
         private ConnectionsViewModel _connections;

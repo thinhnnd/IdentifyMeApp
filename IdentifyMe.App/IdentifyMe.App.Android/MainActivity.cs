@@ -10,6 +10,7 @@ using FFImageLoading.Forms.Platform;
 using Java.Lang;
 using IdentifyMe.App.Converters;
 using Xamarin.Forms;
+using Android.Support.V7.App;
 
 namespace IdentifyMe.App.Droid
 {
@@ -49,6 +50,9 @@ namespace IdentifyMe.App.Droid
 
             // Initializing QR Code Scanning support
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
+
+            //Initializing Rg.Plugin.Popup
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
 
             //Marshmellow and above require permission requests to be made at runtime
             if ((int)Build.VERSION.SdkInt >= 23)

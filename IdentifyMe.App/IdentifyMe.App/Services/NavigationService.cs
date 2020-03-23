@@ -209,6 +209,7 @@ namespace IdentifyMe.App.Services
                 else if (CurrentApplication.MainPage is NavigationPage navPage)
                     await navPage.Navigation.PushAsync(page);
                 //TODO OS-194 else throw exception as the page and Navigation type combination isnt valid
+                // Thinhnnd: this is throw Error when popup viewmodel binding as normal
             }
 
             if (page.BindingContext is IABaseViewModel vm)

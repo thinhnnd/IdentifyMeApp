@@ -14,5 +14,6 @@ namespace IdentifyMe.App.Views
         {
             InitializeComponent();
         }
+
     }
 }
