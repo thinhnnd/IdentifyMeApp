@@ -16,15 +16,29 @@ namespace IdentifyMe.App.ViewModels.Connections
 {
     public class AcceptInvitationViewModel : ABaseViewModel
     {
-       
+        private readonly IProvisioningService _provisioningService;
+        private readonly IConnectionService _connectionService;
+        private readonly IMessageService _messageService;
+        private readonly ICustomAgentContextProvider _contextProvider;
+        private readonly IEventAggregator _eventAggregator;
 
         private ConnectionInvitationMessage _invitation;
 
         public AcceptInvitationViewModel(IUserDialogs userDialogs,
-                                     INavigationService navigationService)
+                                     INavigationService navigationService,
+                                     IProvisioningService provisioningService,
+                                     IConnectionService connectionService,
+                                     IMessageService messageService,
+                                     ICustomAgentContextProvider contextProvider,
+                                     IEventAggregator eventAggregator)
                                      : base("Accept Invitiation", userDialogs, navigationService)
         {
-           
+            _provisioningService = provisioningService;
+            _connectionService = connectionService;
+            _contextProvider = contextProvider;
+            _messageService = messageService;
+            _contextProvider = contextProvider;
+            _eventAggregator = eventAggregator;
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -38,9 +52,59 @@ namespace IdentifyMe.App.ViewModels.Connections
             }
             return base.InitializeAsync(navigationData);
         }
+        private async Task CreateConnection(IAgentContext context, ConnectionInvitationMessage invite)
+        {
+            var provisioningRecord = await _provisioningService.GetProvisioningAsync(context.Wallet);
+            var isEndpointUriAbsent = provisioningRecord.Endpoint.Uri == null;
+            var (msg, rec) = await _connectionService.CreateRequestAsync(context, _invitation);
+            var rsp = await _messageService.SendReceiveAsync<ConnectionResponseMessage>(context.Wallet, msg, rec);
+            if (isEndpointUriAbsent)
+            {
+                await _connectionService.ProcessResponseAsync(context, rsp, rec);
+            }
+        }
+        private async Task AcceptInvitation()
+        {
+            var loadingDialog = DialogService.Loading("Processing");
+
+            var context = await _contextProvider.GetContextAsync();
+
+            if (context == null || _invitation == null)
+            {
+                loadingDialog.Hide();
+                DialogService.Alert("Failed to decode invite!");
+                return;
+            }
+
+            String errorMessage = String.Empty;
+            try
+            {
+                await CreateConnection(context, _invitation);
+            }
+            catch (Hyperledger.Aries.AriesFrameworkException ariesFrameworkException)
+            {
+                errorMessage = ariesFrameworkException.Message;
+            }
+            catch (Exception) //TODO more granular error protection
+            {
+                errorMessage = "Failed to accept";
+            }
+
+            _eventAggregator.Publish(new ApplicationEvent() { Type = ApplicationEventType.ConnectionsUpdated });
+
+            if (loadingDialog.IsShowing)
+                loadingDialog.Hide();
+
+            if (!String.IsNullOrEmpty(errorMessage))
+                DialogService.Alert(errorMessage);
+
+            // await NavigationService.PopModalAsync();
+            Console.WriteLine("Connect ok");
+
+        }
 
         #region Bindable Commands
-
+        public ICommand LoginCommand => new Command(async () => await AcceptInvitation());
         #endregion
 
         #region Bindable Properties

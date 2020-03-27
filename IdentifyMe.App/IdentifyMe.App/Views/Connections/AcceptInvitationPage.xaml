@@ -37,7 +37,8 @@
                 BackgroundColor="DodgerBlue"
                 FontSize="15"
                 Text="Login"
-                TextColor="White" />
+                TextColor="White"
+                Command="{Binding LoginCommand}" />
                 <Button Grid.Row="0"
                 Grid.Column="0"
                 BackgroundColor="White"

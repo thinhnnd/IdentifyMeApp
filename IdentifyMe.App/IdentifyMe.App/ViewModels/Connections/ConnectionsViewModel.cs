@@ -20,6 +20,8 @@ using ZXing.Net.Mobile.Forms;
 using ZXing.Net.Mobile;
 using Rg.Plugins.Popup.Services;
 using IdentifyMe.App.Views.Connections;
+using Hyperledger.Aries.Agents;
+using Hyperledger.Aries.Configuration;
 
 namespace IdentifyMe.App.ViewModels.Connections
 {
@@ -31,6 +33,10 @@ namespace IdentifyMe.App.ViewModels.Connections
         private readonly ILifetimeScope _scope;
         private readonly INavigationService _navigationService;
 
+        //test
+        private readonly IMessageService _messageService;
+        private readonly IProvisioningService _provisioningService;
+
         private IUserDialogs _userDialogs;
 
         public ConnectionsViewModel(IUserDialogs userDialogs,
@@ -38,7 +44,10 @@ namespace IdentifyMe.App.ViewModels.Connections
                                     IConnectionService connectionService,
                                     ICustomAgentContextProvider agentContextProvider,
                                     IEventAggregator eventAggregator,
-                                    ILifetimeScope scope) :
+                                    ILifetimeScope scope,
+                                    IMessageService message,
+                                    IProvisioningService provisioning
+            ) :
                                     base("Connections", userDialogs, navigationService)
         {
             _connectionService = connectionService;
@@ -47,6 +56,8 @@ namespace IdentifyMe.App.ViewModels.Connections
             _scope = scope;
             _navigationService = navigationService;
             _userDialogs = userDialogs;
+            _provisioningService = provisioning;
+            _messageService = message;
         }
 
         public async Task CreateInvitation()
@@ -60,7 +71,7 @@ namespace IdentifyMe.App.ViewModels.Connections
             ConnectionInvitationMessage invitation;
             try
             {
-                invitation =   MessageUtils.DecodeMessageFromUrlFormat<ConnectionInvitationMessage>(InvitationMessageUrl);
+                invitation =  MessageUtils.DecodeMessageFromUrlFormat<ConnectionInvitationMessage>(InvitationMessageUrl);
             }
             catch (Exception)
             {
@@ -127,7 +138,7 @@ namespace IdentifyMe.App.ViewModels.Connections
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await NavigationService.PopModalAsync();
-                    AcceptInvitationViewModel a = new AcceptInvitationViewModel(_userDialogs, _navigationService);
+                    AcceptInvitationViewModel a = new AcceptInvitationViewModel(_userDialogs, _navigationService, _provisioningService, _connectionService,_messageService,_agentContextProvider,_eventAggregator);
                     await NavigationService.NavigateToPopupAsync<AcceptInvitationViewModel>(invitation, true, a);
 
                 });
