@@ -24,7 +24,22 @@
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
             <StackLayout>
-                <Label Text="{Binding InvitationContents}" FontSize="20" />
+                <Image Source="{Binding InvitationImageUrl}" 
+                       WidthRequest="64"
+                       HeightRequest="64" 
+                       Margin="0, 0, 0, 10"/>
+
+                <Label 
+                    Margin="0, 0, 0, 10">
+                    <Label.FormattedText >
+                        <FormattedString>
+                            <Span FontSize="20" Text="{Binding InvitationLabel}" 
+                                  FontAttributes="Bold" />
+                            <Span FontSize="20" Text=" has invited you to connect?" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+         
             </StackLayout>
             <Grid>
                 <Grid.RowDefinitions Height="Auto"></Grid.RowDefinitions>
@@ -34,17 +49,20 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="DodgerBlue"
+                BackgroundColor="{StaticResource AppMainColorLight}"
                 FontSize="15"
-                Text="Login"
-                TextColor="White" />
+                Text="Accept"
+                TextColor="White" 
+                Command="{Binding AcceptInviteCommand}" />
                 <Button Grid.Row="0"
                 Grid.Column="0"
                 BackgroundColor="White"
-                BorderColor="DodgerBlue"
+                BorderColor="{StaticResource AppMainColorLight}"
+                BorderWidth="0.5"
                 FontSize="15"
                 Text="Decline"
-                TextColor="DodgerBlue" />
+                TextColor="{StaticResource AppMainColorLight}" 
+               />
             </Grid>
 
         </StackLayout>

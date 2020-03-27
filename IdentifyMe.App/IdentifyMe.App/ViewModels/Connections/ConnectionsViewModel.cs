@@ -20,6 +20,8 @@ using ZXing.Net.Mobile.Forms;
 using ZXing.Net.Mobile;
 using Rg.Plugins.Popup.Services;
 using IdentifyMe.App.Views.Connections;
+using Hyperledger.Aries.Agents;
+using Hyperledger.Aries.Configuration;
 
 namespace IdentifyMe.App.ViewModels.Connections
 {
@@ -30,6 +32,8 @@ namespace IdentifyMe.App.ViewModels.Connections
         private readonly IEventAggregator _eventAggregator;
         private readonly ILifetimeScope _scope;
         private readonly INavigationService _navigationService;
+        private readonly IMessageService _messageService;
+        private readonly IProvisioningService _provisioningService;
 
         private IUserDialogs _userDialogs;
 
@@ -37,6 +41,8 @@ namespace IdentifyMe.App.ViewModels.Connections
                                     INavigationService navigationService,
                                     IConnectionService connectionService,
                                     ICustomAgentContextProvider agentContextProvider,
+                                    IMessageService messageService,
+                                    IProvisioningService provisioningService,
                                     IEventAggregator eventAggregator,
                                     ILifetimeScope scope) :
                                     base("Connections", userDialogs, navigationService)
@@ -47,6 +53,8 @@ namespace IdentifyMe.App.ViewModels.Connections
             _scope = scope;
             _navigationService = navigationService;
             _userDialogs = userDialogs;
+            _messageService = messageService;
+            _provisioningService = provisioningService;
         }
 
         public async Task CreateInvitation()
@@ -73,6 +81,7 @@ namespace IdentifyMe.App.ViewModels.Connections
         #region Bindable Props
         //Bindable Properties
         private string _invitationMessageUrl = "http://10.0.0.12:8000?c_i=eyJsYWJlbCI6IlBlZGFudGljIEZleW5tYW4iLCJpbWFnZVVybCI6bnVsbCwic2VydmljZUVuZHBvaW50IjoiaHR0cDovLzEwLjAuMC4xMjo4MDAwIiwicm91dGluZ0tleXMiOlsiQ0ZjZWNLMnBVelZxdG0zR2phWFRkY1BaQThmZUtaZU5qRDlwc2NHanZIS1MiXSwicmVjaXBpZW50S2V5cyI6WyJDRWNVcGhKS3RUemUxTVVEMnN0elgyV1RYaWtUZXhpZVhoZ2o1ZnpIc29UTSJdLCJAaWQiOiI2ZWNhMTA2NC0zNzg2LTQwMzAtYmVkNS0xMWM5Y2M5MzFmOTYiLCJAdHlwZSI6ImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIn0=";
+        // "http://10.0.0.12:8000?c_i=eyJsYWJlbCI6IlRydXN0aW5nIEhvZGdraW4iLCJpbWFnZVVybCI6Imh0dHBzOi8vY29ycC52Y2RuLnZuL3VwbG9hZC92bmcvc291cmNlL0FydGljbGUvbG9nb18zNjBsaXZlLnBuZyIsc2VydmljZUVuZHBvaW50IjoiaHR0cDovLzEwLjAuMC4xMTo3MDAwIiwicm91dGluZ0tleXMiOlsiRWN6RWQ0Zkg5NzE2YjZHWEhqZnVVOFNOdjdzd2tMUXoyWWlIeTdRTlNZYjUiXSwicmVjaXBpZW50S2V5cyI6WyJEdkVtbVU5U0dydUxUNmpFTkw3SHA0MXZ0QXdzeDVnVUEzeUpiVnZCTlhFciJdLCJAaWQiOiI1NGFjZmNkZS04ZGZhLTRmZGMtYjBhMi03M2YwNWM2Zjk1OGEiLCJAdHlwZSI6ImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIn0=";
 
         public string InvitationMessageUrl
         {
@@ -127,8 +136,14 @@ namespace IdentifyMe.App.ViewModels.Connections
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await NavigationService.PopModalAsync();
-                    AcceptInvitationViewModel a = new AcceptInvitationViewModel(_userDialogs, _navigationService);
-                    await NavigationService.NavigateToPopupAsync<AcceptInvitationViewModel>(invitation, true, a);
+                    AcceptInvitationViewModel acceptInvitationViewModel = new AcceptInvitationViewModel(
+                        _userDialogs, 
+                        _navigationService, 
+                        _connectionService, 
+                        _agentContextProvider, 
+                        _provisioningService,
+                        _messageService);
+                    await NavigationService.NavigateToPopupAsync<AcceptInvitationViewModel>(invitation, true, acceptInvitationViewModel);
 
                 });
             };

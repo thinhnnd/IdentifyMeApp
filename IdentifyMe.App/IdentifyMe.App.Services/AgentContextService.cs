@@ -54,7 +54,7 @@ namespace IdentifyMe.App.Services
                 WalletCredentials = options.WalletCredentials,
                 AgentKeySeed = options.AgentKeySeed,
                 EndpointUri = options.EndpointUri,
-                AgentName = options.AgentName == null ? "Default Agent" : options.AgentName
+                AgentName = options.AgentName == null ? "Identify.Me Agent" : options.AgentName
             });
 
             await _keyValueStoreService.SetDataAsync(AgentOptionsKey, options);
