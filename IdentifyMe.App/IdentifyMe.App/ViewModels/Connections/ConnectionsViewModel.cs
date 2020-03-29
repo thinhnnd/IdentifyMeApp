@@ -31,11 +31,9 @@ namespace IdentifyMe.App.ViewModels.Connections
         private readonly ICustomAgentContextProvider _agentContextProvider;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILifetimeScope _scope;
-        private readonly INavigationService _navigationService;
         private readonly IMessageService _messageService;
         private readonly IProvisioningService _provisioningService;
 
-        private IUserDialogs _userDialogs;
 
         public ConnectionsViewModel(IUserDialogs userDialogs,
                                     INavigationService navigationService,
@@ -51,16 +49,40 @@ namespace IdentifyMe.App.ViewModels.Connections
             _agentContextProvider = agentContextProvider;
             _eventAggregator = eventAggregator;
             _scope = scope;
-            _navigationService = navigationService;
-            _userDialogs = userDialogs;
             _messageService = messageService;
             _provisioningService = provisioningService;
         }
 
-        public async Task CreateInvitation()
+        public override async Task InitializeAsync(object navigationData)
         {
-           // ConnectionInvitationMessage a;
-           //_connectionService.CreateInvitationAsync();
+            await RefreshConnections();
+
+            //When an Event of ConnectionsUpdated is occur refresh ConnectionsViewModel to update.
+            _eventAggregator.GetEventByType<ApplicationEvent>()
+                .Where(_ => _.Type == ApplicationEventType.ConnectionsUpdated)
+                .Subscribe(async _ => await RefreshConnections());
+        }
+
+        public async Task RefreshConnections()
+        {
+            RefreshingConnections = true;
+
+            var context = await _agentContextProvider.GetContextAsync();
+            var records = await _connectionService.ListAsync(context);
+
+            IList<ConnectionViewModel> connectionVms = new List<ConnectionViewModel>();
+            foreach (var record in records)
+            {
+                var connection = _scope.Resolve<ConnectionViewModel>(new NamedParameter("record", record));
+                connectionVms.Add(connection);
+            }
+
+            //TODO need to compare with the currently displayed connections rather than disposing all of them
+            Connections.Clear();
+            Connections.InsertRange(connectionVms);
+            HasConnections = connectionVms.Any();
+
+            RefreshingConnections = false;
         }
 
         public async Task AcceptConnectionButton()
@@ -94,6 +116,29 @@ namespace IdentifyMe.App.ViewModels.Connections
         {
             get => _qrScanedResult;
             set => this.RaiseAndSetIfChanged(ref _qrScanedResult, value);
+        }
+
+        private RangeEnabledObservableCollection<ConnectionViewModel> _connections = new RangeEnabledObservableCollection<ConnectionViewModel>();
+
+        public RangeEnabledObservableCollection<ConnectionViewModel> Connections
+        {
+            get => _connections;
+            set => this.RaiseAndSetIfChanged(ref _connections, value);
+        }
+
+        private bool _refreshingConnections;
+
+        public bool RefreshingConnections
+        {
+            get => _refreshingConnections;
+            set => this.RaiseAndSetIfChanged(ref _refreshingConnections, value);
+        }
+
+        private bool _hasConnections;
+        public bool HasConnections
+        {
+            get => _hasConnections;
+            set => this.RaiseAndSetIfChanged(ref _hasConnections, value);
         }
 
         #endregion
@@ -137,8 +182,8 @@ namespace IdentifyMe.App.ViewModels.Connections
                 {
                     await NavigationService.PopModalAsync();
                     AcceptInvitationViewModel acceptInvitationViewModel = new AcceptInvitationViewModel(
-                        _userDialogs, 
-                        _navigationService, 
+                        DialogService, 
+                        NavigationService, 
                         _connectionService, 
                         _agentContextProvider, 
                         _provisioningService,

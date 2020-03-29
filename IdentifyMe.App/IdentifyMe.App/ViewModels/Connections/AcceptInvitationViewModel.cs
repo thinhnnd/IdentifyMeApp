@@ -105,6 +105,7 @@ namespace IdentifyMe.App.ViewModels.Connections
             {
                 await _connectionService.ProcessResponseAsync(context, rsp, rec);
             }
+
         }
 
         #region Bindable Properties
@@ -158,6 +159,7 @@ namespace IdentifyMe.App.ViewModels.Connections
             try
             {
                 await CreateConnection(context, _invitation);
+
             }
             catch (Hyperledger.Aries.AriesFrameworkException ariesFrameworkException)
             {
@@ -167,10 +169,7 @@ namespace IdentifyMe.App.ViewModels.Connections
             {
                 errorMessage = "Error";
             }
-
-            
             //_eventAggregator.Publish(new ApplicationEvent() { Type = ApplicationEventType.ConnectionsUpdated });
-
             if (loadingDialog.IsShowing)
                 loadingDialog.Hide();
 
@@ -178,7 +177,6 @@ namespace IdentifyMe.App.ViewModels.Connections
                 DialogService.Alert(errorMessage);
 
             await NavigationService.CloseAllPopupsAsync();
-
         });
         #endregion
     }

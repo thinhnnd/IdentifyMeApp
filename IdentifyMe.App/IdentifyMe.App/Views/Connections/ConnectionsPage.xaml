@@ -3,19 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:IdentifyMe.App.Converters"
              mc:Ignorable="d"
              Title="{Binding Name}"
+             BackgroundColor="{StaticResource BasePageColor}"
              x:Class="IdentifyMe.App.Views.Connections.ConnectionsPage">
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="Start">
+    <ContentPage.Resources>
+        <converters:NameToColorConverter x:Key="NameToColorConverter" />
+        <converters:NameToInitialConverter x:Key="NameToInitialConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content >
+        <StackLayout VerticalOptions="Start" Margin="0, 10">
             <Label Text="Welcome to Connections Page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Entry Text="{Binding InvitationMessageUrl, Mode=TwoWay}" />
-            <Button Text="Scand" Command="{Binding OpenScannerPageCommand}" />
-            <Button Text="Connect" Command="{Binding AcceptConnectionCommand}" />
-            <Label Text="Result:" />
-            <Label Text="{Binding QRScanedResult, Mode=TwoWay}" />
+            <Button Text="Scan to Connect" Command="{Binding OpenScannerPageCommand}" />
+            <ListView ItemsSource="{Binding Connections}" 
+                      HasUnevenRows="true" 
+                      IsPullToRefreshEnabled="True"
+                      >
+                <ListView.ItemTemplate >
+                    <DataTemplate >
+                        <ViewCell >
+                            <ViewCell.View>
+                                <Frame Margin="10, 5" 
+                                       VerticalOptions="Start" 
+                                       Padding="0" 
+                                       HorizontalOptions="FillAndExpand" 
+                                       CornerRadius="5" >
+                                    <Grid  Padding="15"   >
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="Auto" ></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" 
+                                           HeightRequest="40" 
+                                           WidthRequest="40" 
+                                           CornerRadius="20" 
+                                           HorizontalOptions="Start" 
+                                           VerticalOptions="Start"
+                                           BackgroundColor="{Binding Path=ConnectionName, Converter={StaticResource NameToColorConverter}}"
+                                           Margin="0" 
+                                           Padding="0">
+                                            <Label HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" TextColor="White" Text="{Binding Path=ConnectionName, Converter={StaticResource NameToInitialConverter}}" />
+
+                                        </Frame>
+                                        <Label Margin="10, 0, 0, 0" Grid.Column="1" 
+                                            Text="{Binding Path=ConnectionName}"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+                                </Frame>
+                               
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                  
+                </ListView.ItemTemplate>
+                <ListView.RowHeight>10</ListView.RowHeight>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
