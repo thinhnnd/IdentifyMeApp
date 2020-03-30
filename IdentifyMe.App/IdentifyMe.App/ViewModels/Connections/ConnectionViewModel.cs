@@ -54,6 +54,11 @@ namespace IdentifyMe.App.ViewModels.Connections
             ConnectionImageUrl = _record.Alias.ImageUrl;
         }
 
+        public override string ToString()
+        {
+            return ConnectionName;
+        }
+
         public override async Task InitializeAsync(object navigationData)
         {
             await RefreshTransactions();

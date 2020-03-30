@@ -55,7 +55,6 @@
                     Value="{ StaticResource Grey600Color}">
                 </Setter>
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 
