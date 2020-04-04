@@ -53,7 +53,7 @@
                 FontSize="15"
                 Text="Accept"
                 TextColor="White" 
-                Command="{Binding AcceptInviteCommand}" />
+                Command="{Binding AcceptInvitationCommand}" />
                 <Button Grid.Row="0"
                 Grid.Column="0"
                 BackgroundColor="White"

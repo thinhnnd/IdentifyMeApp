@@ -36,6 +36,7 @@ namespace IdentifyMe.App.ViewModels
             {
                 GenesisFilename = "pool_genesis.txn",
                 PoolName = "EdgeAgentPoolConnection",
+                EndpointUri = "https://limegreenmobilecleaninstall--thinhnnd.repl.co/relay-service",
                 ProtocolVersion = 2,
                 WalletConfiguration = new WalletConfiguration { Id = Guid.NewGuid().ToString() },
                 WalletCredentials = new WalletCredentials { Key = "LocalWalletKey" }
