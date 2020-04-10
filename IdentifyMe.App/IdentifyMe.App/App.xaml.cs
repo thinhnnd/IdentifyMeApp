@@ -51,7 +51,6 @@ namespace IdentifyMe.App
             _contextProvider = container.Resolve<ICustomAgentContextProvider>();
             InitializeTask = Initialize();
 
-            DependencyService.Register<MockDataStore>();
 
         }
 
